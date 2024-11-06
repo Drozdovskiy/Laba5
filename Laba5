@@ -1,0 +1,99 @@
+public class Laba5
+{
+    public static void Main(string[] args)
+    {
+        List<string> fioList = new List<string>();
+
+        Console.WriteLine("Введите ФИО:");
+        string fio = Console.ReadLine();
+        fioList.Add(fio);
+
+
+        while (true)
+        {
+            Console.WriteLine("\nВыберите действие:");
+            Console.WriteLine("1. Вытащить фамилию, имя или отчество");
+            Console.WriteLine("2. Отсортировать фамилию");
+            Console.WriteLine("3. Изменить ФИО");
+            Console.WriteLine("4. Вывести ФИО"); 
+            Console.WriteLine("5. Выйти");
+
+            string choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1":
+                    OnlyFIO(fioList);
+                    break;
+                case "2":
+                    SortName(fioList);
+                    break;
+                case "3":
+                    ChangeFio(fioList);
+                    break;
+                case "4":
+                    PrintFio(fioList);
+                    break;
+                case "5":
+                    return;
+                default:
+                    Console.WriteLine("Ошибка");
+                    break;
+            }
+        }
+    }
+
+    static void OnlyFIO(List<string> fioList)
+    {
+        Console.WriteLine("Введите: 1 - фамилия, 2 - имя, 3 - отчество.");
+        string OnlyFIO1 = Console.ReadLine();
+
+        string[] parts = fioList[0].Split(' ');
+        if (parts.Length < 3)
+        {
+            Console.WriteLine("Некорректный формат ФИО");
+            return;
+        }
+
+        switch (OnlyFIO1)
+        {
+            case "1": Console.WriteLine("Фамилия: " + parts[0]); 
+                break;
+            case "2": Console.WriteLine("Имя: " + parts[1]); 
+                break;
+            case "3": Console.WriteLine("Отчество: " + parts[2]); 
+                break;
+            default: Console.WriteLine("Ошибка"); 
+                break;
+        }
+    }
+
+    static void SortName(List<string> fioList)
+    {
+        string[] parts = fioList[0].Split(' ');
+        if (parts.Length < 1)
+        {
+            Console.WriteLine("Ошибка");
+            return;
+        }
+        string lastName = parts[0];
+        string sortedName = string.Join("", lastName.OrderBy(c => c));
+        Console.WriteLine("Отсортированная фамилия: " + sortedName);
+
+    }
+
+    static void ChangeFio(List<string> fioList)
+    {
+        Console.WriteLine("Введите новое ФИО:");
+        fioList[0] = Console.ReadLine();
+    }
+
+    static void PrintFio(List<string> fioList)
+    {
+        Console.WriteLine("ФИО:");
+        foreach (var fio in fioList)
+        {
+            Console.WriteLine(fio);
+        }
+    }
+}
